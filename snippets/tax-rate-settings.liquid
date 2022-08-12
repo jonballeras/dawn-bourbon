@@ -1,0 +1,8 @@
+
+    {%- liquid
+        assign tax = settings.fixed_tax | times: 1.0
+        assign include_tax = 100 | plus: tax
+        assign tax_rate = tax | divided_by: include_tax
+        assign exclude_tax_rate = 1 | minus: tax_rate
+    -%}    
+    

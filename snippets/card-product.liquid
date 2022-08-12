@@ -133,7 +133,13 @@
               </p>
             {%- endif -%}
 
-            {% render 'price', product: card_product, price_class: '' %}
+            
+    {%- if settings.taxes_included -%}
+        {% render 'price', product: card_product, price_class: '', tax_include: true %}
+    {%- else -%}
+        {% render 'price', product: card_product, price_class: '' %}
+    {%- endif 
+    %}
           </div>
         </div>
         <div class="card__badge {{ settings.badge_position }}">

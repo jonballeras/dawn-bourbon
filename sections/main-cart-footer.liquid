@@ -19,10 +19,18 @@
             {%- when '@app' -%}
               {% render block %}
             {%- when 'subtotal' -%}
+{%- include 'tax-rate-settings' -%}
+
               <div class="js-contents" {{ block.shopify_attributes }}>
                 <div class="totals">
                   <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
-                  <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
+                  
+    {%- if settings.taxes_included -%}
+        <p class="totals__subtotal-value">{{ cart.total_price | times: exclude_tax_rate | money }}</p>
+    {%- else -%}
+        <p class="totals__subtotal-value">{{ cart.total_price | money }}</p>
+    {%- endif -%}
+    
                 </div>
 
                 <div>
